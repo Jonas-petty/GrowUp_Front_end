@@ -9,13 +9,13 @@
     background-size: cover;
 }
 
-.flight-form {
-    min-width: 500px;
+.regular-form {
+    max-width: 500px;
     margin: auto;
     padding: 20px;
 }
 
-.flight-form > button {
+.regular-form > button {
     margin-top: 20px;
     width: 10rem;
 }

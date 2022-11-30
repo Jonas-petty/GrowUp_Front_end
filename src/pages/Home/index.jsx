@@ -4,11 +4,11 @@ import Accessibility from "../../assets/Accessibility.png"
 import Safe from "../../assets/safe.svg"
 import Support from "../../assets/support.svg"
 
-import FlightForm from '../FlightForm';
-import Carousel from '../Carousel';
-import Cards from '../Cards';
-import InfoCard from '../InfoCard';
-import Footer from '../Footer';
+import FlightForm from '../../components/FlightForm';
+import Carousel from '../../components/Carousel';
+import Cards from '../../components/Cards';
+import InfoCard from '../../components/InfoCard';
+import Footer from '../../components/Footer';
 
 function Home() {
     return (

@@ -1,0 +1,25 @@
+.login-main {
+    height: 89vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background: url(../../assets/banner.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.regular-form {
+    min-width: 500px;
+    margin: auto;
+    padding: 20px;
+}
+
+.regular-form > button {
+    margin-top: 20px;
+    width: 10rem;
+}
+
+.opt-links {
+    color: blueviolet;
+}
