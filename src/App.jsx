@@ -23,6 +23,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path='/login' element={<Login />} />
           <Route path="/signin" element={<Signin />} /> 
+          <Route path="/main:id" element={<Signin />} /> 
         </Routes>
       </div>
     </Router>

@@ -11,6 +11,8 @@ import InfoCard from '../../components/InfoCard';
 import Footer from '../../components/Footer';
 
 function Home() {
+    document.title = "RiseUp | Home"
+
     return (
     <>
       <main>

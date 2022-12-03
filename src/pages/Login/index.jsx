@@ -5,6 +5,8 @@ import { useForm } from "react-hook-form"
 import "./style.css"
 
 function Login() {
+    document.title = "RiseUp | Login"
+
     const { register , handleSubmit, formState: { errors } } = useForm()
     const onSubmit = data => console.log(data)
 

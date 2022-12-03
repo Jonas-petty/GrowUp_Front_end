@@ -1,5 +1,5 @@
 .login-main {
-    height: 89vh;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -10,7 +10,8 @@
 }
 
 .regular-form {
-    min-width: 500px;
+    width: 100%;
+    /* max-width: px; */
     margin: auto;
     padding: 20px;
 }

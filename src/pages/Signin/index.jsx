@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form'
+import axios from 'axios'
 
 import "./style.css"
 
 function Signin() {
+    document.title = "RiseUp | SignIn"
+
+
     const [nacionalidades, setNacionalidades] = useState([])
 
     useEffect(() => {
@@ -20,15 +24,21 @@ function Signin() {
     })
 
     const { register , handleSubmit, formState: { errors } } = useForm()
-    const onSubmit = data => console.log(data)
+    // const onSubmit = data => console.log(data)
+
+    async function addUser(user) {
+        await axios.post('http://localhost:8080/usuario', user)
+        console.log(user)
+        alert(`Usuário: ${user.nome} cadastrado!`)
+    }
 
 
     return (
         <main className='login-main'>
-            <form className='regular-form' onSubmit={handleSubmit(onSubmit)}>
-                <label htmlFor="name" className="form-label">Nome</label>
-                <input type="text" name="name" id="name" className='form-control form-control-lg' placeholder={'Digite seu nome completo'} required
-                {...register('name', {required: "Por favor digite o seu nome completo"})} />
+            <form className='regular-form' onSubmit={handleSubmit(user => addUser(user))}>
+                <label htmlFor="nome" className="form-label">Nome</label>
+                <input type="text" name="nome" id="nome" className='form-control form-control-lg' placeholder={'Digite seu nome completo'} required
+                {...register('nome', {required: "Por favor digite o seu nome completo"})} />
 
                 <div className="row">
                     <div className="col-md-6">
@@ -41,7 +51,7 @@ function Signin() {
                         <label htmlFor="nacionalidade" className="form-label">Nacionalidade</label>
                         <select name="nacionalidade" id="nacionalidade" className='form-select form-select-lg' required
                         {...register('nacionalidade', {required: "Escolha a sua nacionalidade"})}>
-                            <option value={null}> -- Selecione -- </option>
+                            <option value=''> -- Selecione -- </option>
                             {nacionalidadesArray}
                         </select>            
                     </div>
