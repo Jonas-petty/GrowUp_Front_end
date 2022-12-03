@@ -8,7 +8,6 @@ import "./style.css"
 function Signin() {
     document.title = "RiseUp | SignIn"
 
-
     const [nacionalidades, setNacionalidades] = useState([])
 
     useEffect(() => {

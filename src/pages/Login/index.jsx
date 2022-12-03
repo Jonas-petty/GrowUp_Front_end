@@ -22,7 +22,7 @@ function Login() {
                 {...register('senha', {required: "Por favor digite a sua Senha"})}/>
 
                 <button type="submit" className='btn btn-primary'>Entrar</button>
-                <Link to="forgotPassword" className='opt-links'>Esqueci minha senha</Link>
+                <Link to="/forgotpassword" className='opt-links'>Esqueci minha senha</Link>
                 <br />
                 <Link to="/signin" className='opt-links'>Ainda não tenho uma conta</Link>
             </form>

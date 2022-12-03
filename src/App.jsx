@@ -9,6 +9,7 @@ import Navbar from './components/Navbar';
 import Home from './pages/Home'
 import Login from './pages/Login';
 import Signin from './pages/Signin';
+import ForgotPassword from './pages/ForgotPassword';
 
 import "./App.css"
 
@@ -24,6 +25,7 @@ function App() {
           <Route path='/login' element={<Login />} />
           <Route path="/signin" element={<Signin />} /> 
           <Route path="/main:id" element={<Signin />} /> 
+          <Route path="/forgotpassword" element={<ForgotPassword />}/>
         </Routes>
       </div>
     </Router>
