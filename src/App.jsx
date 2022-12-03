@@ -10,6 +10,7 @@ import Home from './pages/Home'
 import Login from './pages/Login';
 import Signin from './pages/Signin';
 import ForgotPassword from './pages/ForgotPassword';
+import Flights from './pages/Flights';
 
 import "./App.css"
 
@@ -26,6 +27,7 @@ function App() {
           <Route path="/signin" element={<Signin />} /> 
           <Route path="/main:id" element={<Signin />} /> 
           <Route path="/forgotpassword" element={<ForgotPassword />}/>
+          <Route path='/flights' element={<Flights />}/>
         </Routes>
       </div>
     </Router>

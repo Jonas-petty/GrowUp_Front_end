@@ -1,5 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+
+import airports from '../../flightsAPI.json'
 
 import "./style.css"
 
@@ -7,9 +10,18 @@ function FlightForm() {
     const { register , handleSubmit,formState: { errors } } = useForm()
     const onSubmit = data => console.log(data)
 
+    // console.log(airports.response)
+
+    const airportElements = airports.response.map((airport, index) => {
+        // console.log(index)
+        return (
+            <option key={index} value={airport.iata_code}>{airport.iata_code} - {airport.name}</option>
+        )
+    })
+
     return (
         <section className="bg-image flight-form" id='flight-form'>
-            <form className='row g-3 needs-validation' onSubmit={handleSubmit(onSubmit)}>
+            <form className='row g-3 nee    ds-validation' onSubmit={handleSubmit(onSubmit)}>
                 <div className="col-md-4">
                     <label htmlFor="trecho" className="form-label">Trecho</label>
                     <select name="trecho" id="trecho" className="form-select form-select-lg" required
@@ -21,13 +33,19 @@ function FlightForm() {
                 </div>
                 <div className="col-md-4">
                     <label htmlFor="origem" className="form-label">Origem</label>
-                    <input type="text" className="form-control form-control-lg" id="origem" placeholder='REC - Recife' required 
-                    {...register("origem", {required: "Este campo é obrigatório!"})}/>
+                    <select name='origem' className="form-select form-select-lg" id="origem" required 
+                    {...register("origem", {required: "Este campo é obrigatório!"})}>
+                        <option value="">-- Origem --</option>
+                        {airportElements}
+                    </select>
                 </div>
                 <div className="col-md-4">
                     <label htmlFor="destino" className="form-label">Destino</label>
-                    <input type="text" className="form-control form-control-lg" id="destino" placeholder='GRU - Guarulhos' required 
-                    {...register("destino", {required: "Este campo é obrigatório!"})}/>
+                    <select name='destino' className="form-select form-select-lg" id="destino" required 
+                    {...register("destino", {required: "Este campo é obrigatório!"})}>
+                        <option value="">-- Destino --</option>
+                        {airportElements}
+                    </select>
                 </div>
 
                 <div className="col-md-4">
