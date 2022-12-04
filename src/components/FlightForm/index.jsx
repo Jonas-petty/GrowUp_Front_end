@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate} from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
 import airports from '../../flightsAPI.json'
@@ -8,14 +8,23 @@ import "./style.css"
 
 function FlightForm() {
     const { register , handleSubmit,formState: { errors } } = useForm()
-    const onSubmit = data => console.log(data)
 
-    // console.log(airports.response)
+    const navigate = useNavigate()
+    
+    function onSubmit(event) {
+        event.preventDefault
+        event.stopPropagation   
+        
+        console.log(event)
+
+        navigate('/flights', {state: event})
+    }
+
+    
 
     const airportElements = airports.response.map((airport, index) => {
-        // console.log(index)
         return (
-            <option key={index} value={airport.iata_code}>{airport.iata_code} - {airport.name}</option>
+            <option key={index} value={airport.iata_code ? airport.iata_code : airport.icao_code}>{airport.iata_code ? airport.iata_code : airport.icao_code} - {airport.name}</option>
         )
     })
 
