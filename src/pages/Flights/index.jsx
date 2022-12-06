@@ -11,6 +11,7 @@ function Flights() {
     const [ flights, setFlights ] = useState([])
 
     const { state } = useLocation()
+    const userDepDate = new Date(`${state.data_ida}T00:00`)
 
     useEffect(() => {
         fetch(`https://airlabs.co/api/v9/schedules?dep_iata=${state.origem}&api_key=0123761e-b960-4d3f-adaa-a5c48d75567b`)
@@ -34,18 +35,29 @@ function Flights() {
 
 
         const flightElements = flights.map((flight, index) => {
+
+            
             const dep_date = new Date(flight.dep_time_utc)
             const arr_date = new Date(flight.arr_time_utc)
 
-            return (
-                <tr key={index}>
-                    <th scope="row">{flight.dep_iata} - {dep_date.toLocaleString()}</th>
-                    <td>{flight.arr_iata} - {arr_date.toLocaleString()}</td>
-                    <td>{toHoursAndMinutes(flight.duration)}</td>
-                    <td>{flight.airline_iata} - {flight.flight_iata}</td>
-                    <td>R$999.99</td>
-                </tr>
-            )
+            console.log(userDepDate)
+
+            if (userDepDate.toLocaleDateString() == dep_date.toLocaleDateString()) {
+                return (
+                    <tr key={index}>
+                        <th scope="row">{flight.dep_iata} - {dep_date.toLocaleString()}</th>
+                        <td>{flight.arr_iata} - {arr_date.toLocaleString()}</td>
+                        <td>{toHoursAndMinutes(flight.duration)}</td>
+                        <td>{flight.airline_iata} - {flight.flight_iata}</td>
+                        <td>R$999.99</td>
+                    </tr>
+                )
+            } else {
+                return (
+                    <></>
+                )
+            }
+
         })
 
     return (

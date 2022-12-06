@@ -15,7 +15,7 @@ function FlightForm() {
         event.preventDefault
         event.stopPropagation   
         
-        console.log(event)
+        // console.log(event)
 
         navigate('/flights', {state: event})
     }
