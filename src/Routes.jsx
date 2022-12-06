@@ -7,6 +7,7 @@ import Login from './pages/Login';
 import Signin from './pages/Signin';
 import ForgotPassword from './pages/ForgotPassword';
 import Flights from './pages/Flights';
+import ChooseSeat from './pages/ChooseSeat';
 
 function PagesRoutes() {
     return (
@@ -22,6 +23,7 @@ function PagesRoutes() {
                         <Route path="/main:id" element={<Signin />} />
                         <Route path="/forgotpassword" element={<ForgotPassword />}/>
                         <Route path='/flights' element={<Flights />}/>
+                        <Route path='/chooseseat' element={<ChooseSeat />}/>
                     </Routes>
                 </Router>
             </div>

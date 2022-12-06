@@ -1,15 +1,15 @@
 import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link, useNavigate } from 'react-router-dom';
 
 import './style.css'
 
 
 function Flights() {
-
     const [ flights, setFlights ] = useState([])
 
+    const navigate = useNavigate()
     const { state } = useLocation()
     const userDepDate = new Date(`${state.data_ida}T00:00`)
 
@@ -33,18 +33,19 @@ function Flights() {
             return `${padToTwoDigits(hours)}:${padToTwoDigits(minutes)}`
         }
 
+        function Redirect() {
+            console.log("clicou")
+            navigate('/chooseseat')
+
+        }
 
         const flightElements = flights.map((flight, index) => {
-
-            
             const dep_date = new Date(flight.dep_time_utc)
             const arr_date = new Date(flight.arr_time_utc)
 
-            console.log(userDepDate)
-
-            if (userDepDate.toLocaleDateString() == dep_date.toLocaleDateString()) {
+            if (userDepDate.toLocaleDateString() == dep_date.toLocaleDateString() && flight.arr_iata == state.destino) {
                 return (
-                    <tr key={index}>
+                    <tr key={index} onClick={Redirect}>
                         <th scope="row">{flight.dep_iata} - {dep_date.toLocaleString()}</th>
                         <td>{flight.arr_iata} - {arr_date.toLocaleString()}</td>
                         <td>{toHoursAndMinutes(flight.duration)}</td>
@@ -52,30 +53,31 @@ function Flights() {
                         <td>R$999.99</td>
                     </tr>
                 )
-            } else {
-                return (
-                    <></>
-                )
             }
 
         })
 
+        console.log(flightElements)
+
     return (
         <main className='main'>
-            <table className="table table-hover">
-                <thead>
-                    <tr>
-                        <th scope='col'>Origem</th>
-                        <th scope='col'>Destino</th>
-                        <th scope='col'>Duração</th>
-                        <th scope='col'>Companhia</th>
-                        <th scope='col'>Valor</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {flightElements}
-                </tbody>
-            </table>
+            { flightElements.length != 0 ?
+                <table className="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope='col'>Origem</th>
+                            <th scope='col'>Destino</th>
+                            <th scope='col'>Duração</th>
+                            <th scope='col'>Companhia</th>
+                            <th scope='col'>Valor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {flightElements}
+                    </tbody>
+                </table> : 
+                <h1>Nenhum voo foi encontrado!</h1>
+            }
         </main>
     );
 }
