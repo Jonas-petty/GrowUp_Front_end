@@ -1,0 +1,63 @@
+/* main {
+    background-color: blueviolet;
+} */
+
+.seats_info{
+    padding: 40px;
+}
+
+.flight_info {
+    background-color: #FFF;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    padding-top: 10px;
+    max-width: 500px;
+    margin: auto;
+
+    border-radius: 10px;
+}
+
+.flight_info > p {
+    font-size: 1.2rem;
+}
+
+/* .airplane_front {
+    background-color: #FFF;
+
+    margin: auto;
+    margin-top: 20px;
+
+    border-radius: 70% 70% 0 0 ;
+
+    width: 350px;
+    height: 600px;
+
+    border-bottom: 1px solid lightgray;
+} */
+
+.airplane_body {
+    background-color: #FFF;
+
+    width: 350px;
+    height: 400px;
+
+    margin: 40px auto;
+
+    border-radius: 10px;
+}
+
+/* .airplane_back {
+    background-color: #FFF;
+
+    margin: auto;
+    margin-bottom: 20px;
+
+    border-radius: 0 0 70% 70%;
+
+    width: 350px;
+    height: 600px;
+
+    border-top: 1px solid lightgray;
+} */

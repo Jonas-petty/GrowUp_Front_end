@@ -33,19 +33,19 @@ function Flights() {
             return `${padToTwoDigits(hours)}:${padToTwoDigits(minutes)}`
         }
 
-        function Redirect() {
-            console.log("clicou")
-            navigate('/chooseseat')
+        function Redirect(data) {
+            // alert(data)
+            navigate('/chooseseat', {state: data})
 
         }
 
-        const flightElements = flights.map((flight, index) => {
+        const flightElements = flights?.map((flight, index) => {
             const dep_date = new Date(flight.dep_time_utc)
             const arr_date = new Date(flight.arr_time_utc)
 
             if (userDepDate.toLocaleDateString() == dep_date.toLocaleDateString() && flight.arr_iata == state.destino) {
                 return (
-                    <tr key={index} onClick={Redirect}>
+                    <tr key={index} onClick={() => Redirect({flight_code: flight.flight_iata, departure: flight.dep_iata, arrival: flight.arr_iata})}>
                         <th scope="row">{flight.dep_iata} - {dep_date.toLocaleString()}</th>
                         <td>{flight.arr_iata} - {arr_date.toLocaleString()}</td>
                         <td>{toHoursAndMinutes(flight.duration)}</td>
@@ -57,11 +57,9 @@ function Flights() {
 
         })
 
-        console.log(flightElements)
-
     return (
         <main className='main'>
-            { flightElements.length != 0 ?
+            { flightElements?.length != 0 ?
                 <table className="table table-hover">
                     <thead>
                         <tr>

@@ -1,15 +1,36 @@
 import React from 'react';
 import { Link, useNavigate} from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { useEffect } from 'react';
+import { useState } from 'react';
 
 import airports from '../../flightsAPI.json'
 
 import "./style.css"
 
 function FlightForm() {
-    const { register , handleSubmit,formState: { errors } } = useForm()
+    const { register , watch, handleSubmit, formState: { errors } } = useForm()
+
+    const [ departure, setDeparture ] = useState([])
+    const [ arrival, setArrival] = useState([])
+
+    const watchOrigem = watch('origem')
+    const watchDestino = watch('destino')
+
 
     const navigate = useNavigate()
+
+    useEffect(() => {
+        fetch(`https://airlabs.co/api/v9/suggest?q=${watchOrigem}&api_key=0123761e-b960-4d3f-adaa-a5c48d75567b&lang=PT`)
+            .then(response => response.json())
+            .then((data) => setDeparture(data.response.airports))
+    }, [watchOrigem])
+
+    useEffect(() => {
+        fetch(`https://airlabs.co/api/v9/suggest?q=${watchDestino}&api_key=0123761e-b960-4d3f-adaa-a5c48d75567b&lang=PT`)
+            .then(response => response.json())
+            .then((data) => setArrival(data.response.airports))
+    }, [watchDestino])
     
     function onSubmit(event) {
         event.preventDefault
@@ -22,9 +43,15 @@ function FlightForm() {
 
     
 
-    const airportElements = airports.response.map((airport, index) => {
+    const departureElements = departure.map((airport, index) => {
         return (
-            <option key={index} value={airport.iata_code ? airport.iata_code : airport.icao_code}>{airport.iata_code ? airport.iata_code : airport.icao_code} - {airport.name}</option>
+            <option key={index} value={`${airport.iata_code ? airport.iata_code : airport.icao_code}`} >{`${airport.iata_code ? airport.iata_code : airport.icao_code} - ${airport.name}`}</option>
+        )
+    })
+
+    const arrivalElements = arrival.map((airport, index) => {
+        return (
+            <option key={index} value={`${airport.iata_code ? airport.iata_code : airport.icao_code}`} >{`${airport.iata_code ? airport.iata_code : airport.icao_code} - ${airport.name}`}</option>
         )
     })
 
@@ -42,19 +69,21 @@ function FlightForm() {
                 </div>
                 <div className="col-md-4">
                     <label htmlFor="origem" className="form-label">Origem</label>
-                    <select name='origem' className="form-select form-select-lg" id="origem" required 
-                    {...register("origem", {required: "Este campo é obrigatório!"})}>
-                        <option value="">-- Origem --</option>
-                        {airportElements}
-                    </select>
+                    <input name='origem' className="form-control form-control-lg" id="origem" list="departureOptions"
+                    required placeholder='Digite o Aeroporto de origem'
+                    {...register("origem", {required: "Este campo é obrigatório!"})}/>
+                        <datalist id="departureOptions">
+                            {departureElements}
+                        </datalist>
                 </div>
                 <div className="col-md-4">
                     <label htmlFor="destino" className="form-label">Destino</label>
-                    <select name='destino' className="form-select form-select-lg" id="destino" required 
-                    {...register("destino", {required: "Este campo é obrigatório!"})}>
-                        <option value="">-- Destino --</option>
-                        {airportElements}
-                    </select>
+                    <input name='destino' className="form-control form-control-lg" id="destino" list="arrivalOptions"
+                    required placeholder='Digite o Aeroporto de destino' 
+                    {...register("destino", {required: "Este campo é obrigatório!"})}/>
+                        <datalist id="arrivalOptions">
+                            {arrivalElements}
+                        </datalist>
                 </div>
 
                 <div className="col-md-4">
