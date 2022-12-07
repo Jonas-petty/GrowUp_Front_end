@@ -11,26 +11,26 @@ import "./style.css"
 function FlightForm() {
     const { register , watch, handleSubmit, formState: { errors } } = useForm()
 
-    const [ departure, setDeparture ] = useState([])
-    const [ arrival, setArrival] = useState([])
+    // const [ departure, setDeparture ] = useState([])
+    // const [ arrival, setArrival] = useState([])
 
-    const watchOrigem = watch('origem')
-    const watchDestino = watch('destino')
+    // const watchOrigem = watch('origem')
+    // const watchDestino = watch('destino')
 
 
     const navigate = useNavigate()
 
-    useEffect(() => {
-        fetch(`https://airlabs.co/api/v9/suggest?q=${watchOrigem}&api_key=0123761e-b960-4d3f-adaa-a5c48d75567b&lang=PT`)
-            .then(response => response.json())
-            .then((data) => setDeparture(data.response.airports))
-    }, [watchOrigem])
+    // useEffect(() => {
+    //     fetch(`https://airlabs.co/api/v9/suggest?q=${watchOrigem}&api_key=0123761e-b960-4d3f-adaa-a5c48d75567b&lang=PT`)
+    //         .then(response => response.json())
+    //         .then((data) => setDeparture(data.response.airports))
+    // }, [watchOrigem])
 
-    useEffect(() => {
-        fetch(`https://airlabs.co/api/v9/suggest?q=${watchDestino}&api_key=0123761e-b960-4d3f-adaa-a5c48d75567b&lang=PT`)
-            .then(response => response.json())
-            .then((data) => setArrival(data.response.airports))
-    }, [watchDestino])
+    // useEffect(() => {
+    //     fetch(`https://airlabs.co/api/v9/suggest?q=${watchDestino}&api_key=0123761e-b960-4d3f-adaa-a5c48d75567b&lang=PT`)
+    //         .then(response => response.json())
+    //         .then((data) => setArrival(data.response.airports))
+    // }, [watchDestino])
     
     function onSubmit(event) {
         event.preventDefault
@@ -41,19 +41,25 @@ function FlightForm() {
         navigate('/flights', {state: event})
     }
 
-    
+    console.log(airports.response)
 
-    const departureElements = departure.map((airport, index) => {
+    const flightElements = airports.response.map((flight, index) => {
         return (
-            <option key={index} value={`${airport.iata_code ? airport.iata_code : airport.icao_code}`} >{`${airport.iata_code ? airport.iata_code : airport.icao_code} - ${airport.name}`}</option>
+            <option value={flight.iata_code ? flight.iata_code : flight.icao_code}>{flight.name}</option>
         )
     })
 
-    const arrivalElements = arrival.map((airport, index) => {
-        return (
-            <option key={index} value={`${airport.iata_code ? airport.iata_code : airport.icao_code}`} >{`${airport.iata_code ? airport.iata_code : airport.icao_code} - ${airport.name}`}</option>
-        )
-    })
+    // const departureElements = departure.map((airport, index) => {
+    //     return (
+    //         <option key={index} value={`${airport.iata_code ? airport.iata_code : airport.icao_code}`} >{`${airport.iata_code ? airport.iata_code : airport.icao_code} - ${airport.name}`}</option>
+    //     )
+    // })
+
+    // const arrivalElements = arrival.map((airport, index) => {
+    //     return (
+    //         <option key={index} value={`${airport.iata_code ? airport.iata_code : airport.icao_code}`} >{`${airport.iata_code ? airport.iata_code : airport.icao_code} - ${airport.name}`}</option>
+    //     )
+    // })
 
     return (
         <section className="bg-image flight-form" id='flight-form'>
@@ -73,7 +79,7 @@ function FlightForm() {
                     required placeholder='Digite o Aeroporto de origem'
                     {...register("origem", {required: "Este campo é obrigatório!"})}/>
                         <datalist id="departureOptions">
-                            {departureElements}
+                            {flightElements}
                         </datalist>
                 </div>
                 <div className="col-md-4">
@@ -82,7 +88,7 @@ function FlightForm() {
                     required placeholder='Digite o Aeroporto de destino' 
                     {...register("destino", {required: "Este campo é obrigatório!"})}/>
                         <datalist id="arrivalOptions">
-                            {arrivalElements}
+                            {flightElements}
                         </datalist>
                 </div>
 
