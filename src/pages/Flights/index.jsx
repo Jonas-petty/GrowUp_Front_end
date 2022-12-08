@@ -14,7 +14,7 @@ function Flights() {
     const userDepDate = new Date(`${state.data_ida}T00:00`)
 
     useEffect(() => {
-        fetch(`https://airlabs.co/api/v9/schedules?dep_iata=${state.origem}&api_key=0123761e-b960-4d3f-adaa-a5c48d75567b`)
+        fetch(`https://airlabs.co/api/v9/schedules?dep_iata=${state.origem}&api_key=5349eddd-e9fa-47fd-a1cd-e0bb46eb362c`)
             .then(response => response.json())
             .then((data) => {
                 // console.log(data.response)
@@ -39,13 +39,21 @@ function Flights() {
 
         }
 
-        const flightElements = flights?.map((flight, index) => {
+        const flightElements = flights.map((flight, index) => {
             const dep_date = new Date(flight.dep_time_utc)
             const arr_date = new Date(flight.arr_time_utc)
 
+            const data = {
+                flight_code: flight.flight_iata,
+                departure: flight.dep_iata,
+                arrival: flight.arr_iata,
+                dep_date: dep_date,
+                arr_date: arr_date
+            }
+
             if (userDepDate.toLocaleDateString() == dep_date.toLocaleDateString() && flight.arr_iata == state.destino) {
                 return (
-                    <tr key={index} onClick={() => Redirect({flight_code: flight.flight_iata, departure: flight.dep_iata, arrival: flight.arr_iata})}>
+                    <tr key={index} onClick={() => Redirect(data)}>
                         <th scope="row">{flight.dep_iata} - {dep_date.toLocaleString()}</th>
                         <td>{flight.arr_iata} - {arr_date.toLocaleString()}</td>
                         <td>{toHoursAndMinutes(flight.duration)}</td>
@@ -59,7 +67,7 @@ function Flights() {
 
     return (
         <main className='main'>
-            { flightElements?.length != 0 ?
+            { flightElements.length != 0 ?
                 <table className="table table-hover">
                     <thead>
                         <tr>

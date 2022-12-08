@@ -1,8 +1,6 @@
 import React from 'react';
 import { Link, useNavigate} from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { useEffect } from 'react';
-import { useState } from 'react';
 
 import airports from '../../flightsAPI.json'
 
@@ -45,7 +43,7 @@ function FlightForm() {
 
     const flightElements = airports.response.map((flight, index) => {
         return (
-            <option value={flight.iata_code ? flight.iata_code : flight.icao_code}>{flight.name}</option>
+            <option key={index} value={flight.iata_code ? flight.iata_code : flight.icao_code}>{flight.name}</option>
         )
     })
 

@@ -14,7 +14,7 @@ function Navbar() {
                 <div className="collapse navbar-collapse justify-content-end" id="navbarTogglerDemo02">
                     <ul className="navbar-nav ms-auto ">
                         <li className="nav-item">
-                            <a className="nav-link active" aria-current="page" href="#">Comprar Passagem</a>
+                            <Link to="/" className='nav-link active' aria-current="page">Comprar Passagem</Link>
                         </li>
                         <li className="nav-item">
                             <a className="nav-link" href="#">Checkin</a>
