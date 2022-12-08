@@ -8,6 +8,8 @@ import Seats from '../../components/Seats';
 import './style.css'
 
 function ChooseSeat() {
+    document.title = "RiseUp | Escolher Assento"
+
     const [ departureTitle, setDepartureTitle ] = useState('')
     const [ arrivalTitle, setArrivalTitle ] = useState('')
 
@@ -53,7 +55,7 @@ function ChooseSeat() {
 
         const flight_info = {...state, seat: seat}
 
-        navigate('/')
+        navigate('/flightdetails', {state: flight_info})
 
 
     }

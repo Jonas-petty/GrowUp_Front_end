@@ -10,6 +10,8 @@ import Cards from '../../components/Cards';
 import InfoCard from '../../components/InfoCard';
 import Footer from '../../components/Footer';
 
+
+import "./style.css"
 function Home() {
     document.title = "RiseUp | Home"
 
@@ -38,7 +40,7 @@ function Home() {
           />
           <InfoCard 
             image={Support}
-            title={'Suporte Remot'}
+            title={'Suporte Remoto'}
             alter="Personagem fazendo uso do suporte do conforto de seu lar"
             text='Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse similique laudantium
                 corrupti fuga sunt id excepturi laboriosam veniam unde dignissimos?'

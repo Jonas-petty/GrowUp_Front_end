@@ -6,7 +6,7 @@ function Seats(props) {
         <div className='seats'>
             {props.values.map(seat => {
                 return (
-                <div className='seat' onClick={props.getSeat} key={seat}>{seat}</div>
+                <div role='button' className='seat' onClick={props.getSeat} key={seat}>{seat}</div>
                 )
             })}
         </div>

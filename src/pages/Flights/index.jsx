@@ -7,6 +7,8 @@ import './style.css'
 
 
 function Flights() {
+    document.title = "RiseUp | Lista Voos"
+
     const [ flights, setFlights ] = useState([])
 
     const navigate = useNavigate()
@@ -43,12 +45,16 @@ function Flights() {
             const dep_date = new Date(flight.dep_time_utc)
             const arr_date = new Date(flight.arr_time_utc)
 
+            const flight_duration = toHoursAndMinutes(flight.duration)
+
             const data = {
+                airline: flight.airline_iata,
                 flight_code: flight.flight_iata,
                 departure: flight.dep_iata,
                 arrival: flight.arr_iata,
                 dep_date: dep_date,
-                arr_date: arr_date
+                arr_date: arr_date,
+                flight_duration: flight_duration
             }
 
             if (userDepDate.toLocaleDateString() == dep_date.toLocaleDateString() && flight.arr_iata == state.destino) {
@@ -56,7 +62,7 @@ function Flights() {
                     <tr key={index} onClick={() => Redirect(data)}>
                         <th scope="row">{flight.dep_iata} - {dep_date.toLocaleString()}</th>
                         <td>{flight.arr_iata} - {arr_date.toLocaleString()}</td>
-                        <td>{toHoursAndMinutes(flight.duration)}</td>
+                        <td>{flight_duration}</td>
                         <td>{flight.airline_iata} - {flight.flight_iata}</td>
                         <td>R$999.99</td>
                     </tr>

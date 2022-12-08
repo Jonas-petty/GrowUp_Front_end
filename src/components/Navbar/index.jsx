@@ -17,16 +17,16 @@ function Navbar() {
                             <Link to="/" className='nav-link active' aria-current="page">Comprar Passagem</Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">Checkin</a>
+                            <a className="nav-link disabled" href="#">Checkin</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">Status de Voo</a>
+                            <a className="nav-link disabled" href="#">Status de Voo</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">Atendimento</a>
+                            <a className="nav-link  disabled" href="#">Atendimento</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">Informações</a>
+                            <a className="nav-link disabled" href="#">Informações</a>
                         </li>
                         <li className="nav-item">
                             <Link className="btn btn-primary" role='button' to="login">Login</Link>

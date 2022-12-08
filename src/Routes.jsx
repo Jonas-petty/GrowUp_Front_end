@@ -8,6 +8,8 @@ import Signin from './pages/Signin';
 import ForgotPassword from './pages/ForgotPassword';
 import Flights from './pages/Flights';
 import ChooseSeat from './pages/ChooseSeat';
+import FlightDetails from './pages/FlightDetails';
+import Pagamento from './pages/Pagamento';
 
 function PagesRoutes() {
     return (
@@ -24,6 +26,8 @@ function PagesRoutes() {
                         <Route path="/forgotpassword" element={<ForgotPassword />}/>
                         <Route path='/flights' element={<Flights />}/>
                         <Route path='/chooseseat' element={<ChooseSeat />}/>
+                        <Route path='/flightdetails' element={<FlightDetails />}/>
+                        <Route path='/pay' element={<Pagamento />}/>
                     </Routes>
                 </Router>
             </div>
