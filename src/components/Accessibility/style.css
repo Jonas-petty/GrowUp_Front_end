@@ -1,0 +1,26 @@
+.icons {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    
+}
+
+.icons > i {
+    cursor: pointer;
+    font-size: 1.5rem;
+    margin-right: 10px;
+}
+
+.icons > i:hover {
+    color: blueviolet;
+}
+
+@media (max-width: 770px) {
+    .accessibility {
+        z-index: 1000000;
+    }
+}
+
+.accessibility.dark {
+    background-color: #000;
+}

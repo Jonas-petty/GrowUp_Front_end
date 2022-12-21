@@ -1,3 +1,8 @@
+.home_main {
+    display: flex;
+    flex-direction: column;
+}
+
 .information {
     max-width: 99vw;
     margin: auto;

@@ -4,6 +4,7 @@ import Accessibility from "../../assets/Accessibility.png"
 import Safe from "../../assets/safe.svg"
 import Support from "../../assets/support.svg"
 
+import AccessibilityArea from '../../components/Accessibility';
 import FlightForm from '../../components/FlightForm';
 import Carousel from '../../components/Carousel';
 import Cards from '../../components/Cards';
@@ -12,12 +13,33 @@ import Footer from '../../components/Footer';
 
 
 import "./style.css"
+import { useState } from 'react';
 function Home() {
+    const [ isHighContrast, setIsHighContrast ] = useState(true)
+
     document.title = "RiseUp | Home"
+
+    function AumentarFonte() {
+      const myP = document.getElementsByTagName('p')
+      console.log(myP)
+
+      for (let i = 0; i < myP.length; i++) {
+        myP[i].style.fontSize = '2rem'
+        
+      }
+    }
+
+    function AtivarContraste() {
+      setIsHighContrast((prev) => !prev)
+    }
 
     return (
     <>
-      <main>
+      <main className='home_main'>
+        {/* <AccessibilityArea 
+        AumentarFonte={() => AumentarFonte()}
+        AtivarContraste={() => AtivarContraste()}
+        isHighContraste={isHighContrast}/> */}
         <FlightForm />
         <Carousel />
         <Cards />
