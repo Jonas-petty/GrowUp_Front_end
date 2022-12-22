@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import "./style.css"
 
-function Navbar() {
+function Navbar({auth, isloged}) {
     return (
         <nav className="navbar navbar-expand-lg bg-light">
             <div className="container-fluid">
@@ -29,7 +29,10 @@ function Navbar() {
                             <a className="nav-link disabled" href="#">Informações</a>
                         </li>
                         <li className="nav-item">
-                            <Link className="btn btn-primary" role='button' to="login">Login</Link>
+                            {isloged ?
+                                <button onClick={() => auth.signOut()}>Sair</button>
+                                :
+                                <Link className="btn btn-primary" role='button' to="login">Login</Link>}
                             
                         </li>
                     </ul>

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form'
-import axios from 'axios'
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 
 import "./style.css"
 
-function Signin() {
+function Signin({auth}) {
     document.title = "RiseUp | SignIn"
 
     const [nacionalidades, setNacionalidades] = useState([])
@@ -23,18 +23,36 @@ function Signin() {
     })
 
     const { register , handleSubmit, formState: { errors } } = useForm()
-    // const onSubmit = data => console.log(data)
 
-    async function addUser(user) {
-        await axios.post('http://localhost:8080/usuario', user)
-        console.log(user)
-        alert(`Usuário: ${user.nome} cadastrado!`)
+    function addUser(userData) {
+        createUserWithEmailAndPassword(auth, userData.email, userData.senha)
+            .then((userCredential) => {
+                const user = userCredential.user
+
+                updateProfile(auth.currentUser, {
+                    displayName: userData.nome,
+                    cpf: userData.cpf,
+                    nacionalidade: userData.nacionalidade
+                })
+                .then(() => alert(`Usuário: ${userData.nome} cadastrado!`))
+                .catch((error) => {
+                    const errorCode = error.code
+                    const errorMessage = error.message
+                    alert(errorMessage)
+                })
+            })
+            .catch((error) => {
+                const errorCode = error.code
+                const errorMessage = error.message
+                alert(errorMessage)
+            })
     }
 
 
     return (
         <main className='login-main'>
             <form className='regular-form' onSubmit={handleSubmit(user => addUser(user))}>
+
                 <label htmlFor="nome" className="form-label">Nome</label>
                 <input type="text" name="nome" id="nome" className='form-control form-control-lg' placeholder={'Digite seu nome completo'} required
                 {...register('nome', {required: "Por favor digite o seu nome completo"})} />

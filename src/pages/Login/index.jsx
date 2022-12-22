@@ -2,17 +2,38 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from "react-hook-form"
 
-import "./style.css"
+import GoogleSigninButton from '../../components/GoogleSiginButton';
 
-function Login() {
+import "./style.css"
+import { signInWithEmailAndPassword } from 'firebase/auth';
+
+function Login({auth}) {
     document.title = "RiseUp | Login"
 
     const { register , handleSubmit, formState: { errors } } = useForm()
     const onSubmit = data => console.log(data)
 
+    function LoginUser(userData) {
+        signInWithEmailAndPassword(auth, userData.email, userData.senha)
+            .then((userCredential) => {
+                const user = userCredential.user
+
+                alert(`Usuário: ${user.displayName} encontrado!`)
+            })
+            .catch((error) => {
+                const errorCode = error.code
+                const errorMessage = error.message
+                alert(errorMessage)
+            })
+    }
+
     return (
         <main className='login-main'>
-            <form className='regular-form' onSubmit={handleSubmit(onSubmit)}>
+            <GoogleSigninButton 
+                content={'Cadastrar com Google'}
+            />
+
+            <form className='regular-form' onSubmit={handleSubmit(LoginUser)}>
                 <label htmlFor="email" className="form-label">Email</label>
                 <input type="email" name="email" id="email" className='form-control form-control-lg' placeholder={'exemplo@email.com'} required
                 {...register('email', {required: "Por favor digite o seu Email"})} />

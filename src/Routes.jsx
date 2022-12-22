@@ -11,17 +11,17 @@ import ChooseSeat from './pages/ChooseSeat';
 import FlightDetails from './pages/FlightDetails';
 import Pagamento from './pages/Pagamento';
 
-function PagesRoutes() {
+function PagesRoutes({auth, db, isloged}) {
     return (
             <div className="root">
                 <Router>
                     <header>
-                        <Navbar />
+                        <Navbar auth={auth} isloged={isloged} />
                     </header>
                     <Routes>
                         <Route index element={<Home />} />
-                        <Route path='/login' element={<Login />} />
-                        <Route path="/signin" element={<Signin />} />
+                        <Route path='/login' element={<Login auth={auth} />} />
+                        <Route path="/signin" element={<Signin auth={auth} />} />
                         <Route path="/main:id" element={<Signin />} />
                         <Route path="/forgotpassword" element={<ForgotPassword />}/>
                         <Route path='/flights' element={<Flights />}/>
