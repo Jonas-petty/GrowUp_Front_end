@@ -2,62 +2,28 @@ import React from 'react';
 import { Link, useNavigate} from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
-import airports from '../../flightsAPI.json'
+import {response} from '../../flightsAPI.json'
 
 import "./style.css"
 
 function FlightForm() {
     const { register , watch, handleSubmit, formState: { errors } } = useForm()
 
-    // const [ departure, setDeparture ] = useState([])
-    // const [ arrival, setArrival] = useState([])
-
-    // const watchOrigem = watch('origem')
-    // const watchDestino = watch('destino')
-
-
     const navigate = useNavigate()
-
-    // useEffect(() => {
-    //     fetch(`https://airlabs.co/api/v9/suggest?q=${watchOrigem}&api_key=0123761e-b960-4d3f-adaa-a5c48d75567b&lang=PT`)
-    //         .then(response => response.json())
-    //         .then((data) => setDeparture(data.response.airports))
-    // }, [watchOrigem])
-
-    // useEffect(() => {
-    //     fetch(`https://airlabs.co/api/v9/suggest?q=${watchDestino}&api_key=0123761e-b960-4d3f-adaa-a5c48d75567b&lang=PT`)
-    //         .then(response => response.json())
-    //         .then((data) => setArrival(data.response.airports))
-    // }, [watchDestino])
     
     function onSubmit(event) {
         event.preventDefault
         event.stopPropagation   
-        
-        // console.log(event)
-
         navigate('/flights', {state: event})
     }
 
     console.log(airports.response)
 
-    const flightElements = airports.response.map((flight, index) => {
+    const flightElements = response.map((flight, index) => {
         return (
             <option key={index} value={flight.iata_code ? flight.iata_code : flight.icao_code}>{flight.name}</option>
         )
     })
-
-    // const departureElements = departure.map((airport, index) => {
-    //     return (
-    //         <option key={index} value={`${airport.iata_code ? airport.iata_code : airport.icao_code}`} >{`${airport.iata_code ? airport.iata_code : airport.icao_code} - ${airport.name}`}</option>
-    //     )
-    // })
-
-    // const arrivalElements = arrival.map((airport, index) => {
-    //     return (
-    //         <option key={index} value={`${airport.iata_code ? airport.iata_code : airport.icao_code}`} >{`${airport.iata_code ? airport.iata_code : airport.icao_code} - ${airport.name}`}</option>
-    //     )
-    // })
 
     return (
         <section className="bg-image flight-form" id='flight-form'>

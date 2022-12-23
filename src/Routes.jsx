@@ -19,7 +19,7 @@ function PagesRoutes({auth, db, isloged}) {
                         <Navbar auth={auth} isloged={isloged} />
                     </header>
                     <Routes>
-                        <Route index element={<Home />} />
+                        <Route index path='/' element={<Home />} />
                         <Route path='/login' element={<Login auth={auth} />} />
                         <Route path="/signin" element={<Signin auth={auth} />} />
                         <Route path="/main:id" element={<Signin />} />

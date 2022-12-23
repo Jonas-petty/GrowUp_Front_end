@@ -1,9 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import "./style.css"
 
 function Navbar({auth, isloged}) {
+    const navigate = useNavigate()
+
+    function SignOut(auth) {
+        auth.signOut()
+        navigate('/')
+    }
+
     return (
         <nav className="navbar navbar-expand-lg bg-light">
             <div className="container-fluid">
@@ -30,7 +37,7 @@ function Navbar({auth, isloged}) {
                         </li>
                         <li className="nav-item">
                             {isloged ?
-                                <button onClick={() => auth.signOut()}>Sair</button>
+                                <button className='btn btn-primary' onClick={() => SignOut(auth)}>Sair</button>
                                 :
                                 <Link className="btn btn-primary" role='button' to="login">Login</Link>}
                             

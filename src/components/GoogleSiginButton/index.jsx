@@ -1,8 +1,8 @@
 import 'bootstrap-icons/font/bootstrap-icons.json'
 
-function GoogleSigninButton({SignIn, content}) {
+function GoogleSigninButton({content, signinFunction}) {
     return (
-        <button onClick={SignIn}><i class="bi bi-google"> {content}</i></button>
+        <button className='btn btn-primary' onClick={signinFunction}><i className="bi bi-google"> {content}</i></button>
     );
 }
 

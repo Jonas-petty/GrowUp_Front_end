@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form'
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 
@@ -9,6 +9,8 @@ function Signin({auth}) {
     document.title = "RiseUp | SignIn"
 
     const [nacionalidades, setNacionalidades] = useState([])
+
+    const navigate = useNavigate()
 
     useEffect(() => {
         fetch('https://amazon-api.sellead.com/country')
@@ -34,7 +36,10 @@ function Signin({auth}) {
                     cpf: userData.cpf,
                     nacionalidade: userData.nacionalidade
                 })
-                .then(() => alert(`Usuário: ${userData.nome} cadastrado!`))
+                .then(() => {
+                    alert(`Usuário: ${userData.nome} cadastrado!`)
+                    navigate('/')
+                })
                 .catch((error) => {
                     const errorCode = error.code
                     const errorMessage = error.message

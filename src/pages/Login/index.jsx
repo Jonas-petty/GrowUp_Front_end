@@ -1,24 +1,44 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form"
 
 import GoogleSigninButton from '../../components/GoogleSiginButton';
 
 import "./style.css"
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 
 function Login({auth}) {
     document.title = "RiseUp | Login"
 
+    const navigate = useNavigate()
+
     const { register , handleSubmit, formState: { errors } } = useForm()
-    const onSubmit = data => console.log(data)
+
+    
+
+    function LoginGoogle() {
+        const provider = new GoogleAuthProvider()
+
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                const user = result.user
+                alert(`Seja bem vindo(a) ${user.displayName}`)
+                navigate('/')
+            })
+            .catch((error) => {
+                const errorCode = error.code
+                const errorMessage = error.message
+                alert(errorMessage)
+            })
+    }
 
     function LoginUser(userData) {
         signInWithEmailAndPassword(auth, userData.email, userData.senha)
             .then((userCredential) => {
                 const user = userCredential.user
 
-                alert(`Usuário: ${user.displayName} encontrado!`)
+                alert(`Seja bem vindo(a) ${user.displayName}`)
+                navigate('/')
             })
             .catch((error) => {
                 const errorCode = error.code
@@ -30,7 +50,8 @@ function Login({auth}) {
     return (
         <main className='login-main'>
             <GoogleSigninButton 
-                content={'Cadastrar com Google'}
+                signinFunction={LoginGoogle}
+                content={'Entrar com Google'}
             />
 
             <form className='regular-form' onSubmit={handleSubmit(LoginUser)}>
