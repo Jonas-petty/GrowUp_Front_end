@@ -27,7 +27,7 @@ function PagesRoutes({auth, db, isloged}) {
                         <Route path='/flights' element={<Flights />}/>
                         <Route path='/chooseseat' element={<ChooseSeat />}/>
                         <Route path='/flightdetails' element={<FlightDetails />}/>
-                        <Route path='/pay' element={<Pagamento />}/>
+                        <Route path='/pay' element={<Pagamento auth={auth} db={db} isloged={isloged}/>}/>
                     </Routes>
                 </Router>
             </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form"
 
 import GoogleSigninButton from '../../components/GoogleSiginButton';
@@ -11,6 +11,7 @@ function Login({auth}) {
     document.title = "RiseUp | Login"
 
     const navigate = useNavigate()
+    const {state} = useLocation()
 
     const { register , handleSubmit, formState: { errors } } = useForm()
 
@@ -23,7 +24,8 @@ function Login({auth}) {
             .then((result) => {
                 const user = result.user
                 alert(`Seja bem vindo(a) ${user.displayName}`)
-                navigate('/')
+                navigate(`${state.alterPath ? state.alterPath : '/'}`)
+                
             })
             .catch((error) => {
                 const errorCode = error.code

@@ -17,8 +17,6 @@ function FlightForm() {
         navigate('/flights', {state: event})
     }
 
-    console.log(airports.response)
-
     const flightElements = response.map((flight, index) => {
         return (
             <option key={index} value={flight.iata_code ? flight.iata_code : flight.icao_code}>{flight.name}</option>

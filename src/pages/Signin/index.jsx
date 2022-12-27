@@ -53,7 +53,6 @@ function Signin({auth}) {
             })
     }
 
-
     return (
         <main className='login-main'>
             <form className='regular-form' onSubmit={handleSubmit(user => addUser(user))}>

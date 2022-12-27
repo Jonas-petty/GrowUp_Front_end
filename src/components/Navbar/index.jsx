@@ -36,10 +36,12 @@ function Navbar({auth, isloged}) {
                             <a className="nav-link disabled" href="#">Informações</a>
                         </li>
                         <li className="nav-item">
-                            {isloged ?
+                            {
+                            isloged ?
                                 <button className='btn btn-primary' onClick={() => SignOut(auth)}>Sair</button>
                                 :
-                                <Link className="btn btn-primary" role='button' to="login">Login</Link>}
+                                <Link className="btn btn-primary" role='button' to="login">Login</Link>
+                            }
                             
                         </li>
                     </ul>
